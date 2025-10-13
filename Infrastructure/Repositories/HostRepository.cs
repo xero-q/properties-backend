@@ -1,5 +1,5 @@
 using Application.Abstractions.Repositories;
-using Domain.Entities;
+using Domain.Hosts;
 using Infrastructure.Database.Persistence;
 
 namespace Infrastructure.Repositories;

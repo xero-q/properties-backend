@@ -1,6 +1,7 @@
+using Domain.Properties;
 using SharedKernel;
 
-namespace Domain.Entities;
+namespace Domain.Hosts;
 
 public class Host: Entity
 {

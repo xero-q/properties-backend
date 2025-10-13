@@ -1,9 +1,7 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using Domain.Properties;
 using SharedKernel;
 
-namespace Domain.Entities;
+namespace Domain.Bookings;
 
 public class Booking:Entity
 {

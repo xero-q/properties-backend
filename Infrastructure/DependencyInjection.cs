@@ -35,12 +35,9 @@ public static class DependencyInjection
             });
         
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-        services.AddScoped<IModelTypeRepository, ModelTypeRepository>();
-        services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IModelRepository, ModelRepository>();
-        services.AddScoped<IThreadRepository, ThreadRepository>();
+        services.AddScoped<IPropertyRepository, PropertyRepository>();
         services.AddScoped<IHostRepository, HostRepository>();
        
         return services;

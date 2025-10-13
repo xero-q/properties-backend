@@ -1,5 +1,8 @@
 using Application.Abstractions.Data;
-using Domain.Entities;
+using Domain.Bookings;
+using Domain.DomainEvents;
+using Domain.Hosts;
+using Domain.Properties;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database.Persistence;

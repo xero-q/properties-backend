@@ -1,4 +1,7 @@
-﻿using Domain.Entities;
+﻿using Domain.Bookings;
+using Domain.DomainEvents;
+using Domain.Hosts;
+using Domain.Properties;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Abstractions.Data;

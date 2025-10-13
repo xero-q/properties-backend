@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Abstractions\Messaging\" />
       <Folder Include="Features\Hosts\Commands\" />
       <Folder Include="Features\Hosts\Queries\" />
       <Folder Include="Mappings\" />

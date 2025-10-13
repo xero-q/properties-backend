@@ -1,6 +1,4 @@
-using Application.Contracts.Responses;
-using Domain.Entities;
-using EHR.Application.Wrappers;
+using Domain.Hosts;
 
 namespace Application.Abstractions.Repositories;
 

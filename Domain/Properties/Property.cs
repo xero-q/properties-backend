@@ -1,6 +1,9 @@
+using Domain.Bookings;
+using Domain.DomainEvents;
+using Domain.Hosts;
 using SharedKernel;
 
-namespace Domain.Entities;
+namespace Domain.Properties;
 
 public enum PropertyStatus
 {

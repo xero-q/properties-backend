@@ -1,4 +1,4 @@
-using Domain.Entities;
+using Domain.Properties;
 
 namespace Application.Contracts.Responses;
 

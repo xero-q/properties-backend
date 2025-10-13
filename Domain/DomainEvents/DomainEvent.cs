@@ -1,6 +1,7 @@
+using Domain.Properties;
 using SharedKernel;
 
-namespace Domain.Entities;
+namespace Domain.DomainEvents;
 
 public enum DomainEventType {
 
