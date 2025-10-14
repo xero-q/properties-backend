@@ -1,5 +1,6 @@
 ﻿using Application.Contracts.Responses;
-using FluentValidation;
+using Application.Exceptions;
+using ValidationException = FluentValidation.ValidationException;
 
 namespace Web.Api.Middlewares;
 public class ValidationMappingMiddleware(RequestDelegate next)
@@ -34,6 +35,16 @@ public class ValidationMappingMiddleware(RequestDelegate next)
                 Message = ex.Message
             };
 
+            await context.Response.WriteAsJsonAsync(message);
+        }
+        catch (NotFoundException ex)
+        {
+            context.Response.StatusCode = 404;
+            var message = new
+            {
+                Success = false,
+                Message = ex.Message
+            };
             await context.Response.WriteAsJsonAsync(message);
         }
         catch (Exception ex)

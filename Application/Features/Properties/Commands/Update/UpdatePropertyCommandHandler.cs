@@ -2,6 +2,7 @@ using Application.Abstractions.Data;
 using MediatR;
 using Application.Abstractions.Repositories;
 using Application.Contracts.Responses;
+using Application.Exceptions;
 using Application.Mappings;
 using FluentValidation;
 using ValidationException = Application.Exceptions.ValidationException;
@@ -18,14 +19,14 @@ namespace Application.Features.Properties.Commands.Update
 
             if (property is null)
             {
-                throw new ValidationException("Provided Property Id doesn't exist.");
+                throw new NotFoundException("Property",request.Id);
             }
            
             var host = await hostRepository.GetByIdAsync(request.HostId, cancellationToken);
 
             if (host is null)
             {
-                throw new ValidationException("Provided HostId doesn't exist.");
+                throw new NotFoundException("Host",request.HostId);
             }
 
             property.Name = request.Name;

@@ -1,6 +1,8 @@
 using Application.Contracts.Requests;
 using Application.Features.Properties.Commands.Create;
+using Application.Features.Properties.Commands.Delete;
 using Application.Features.Properties.Commands.Update;
+using Application.Features.Properties.Queries.GetById;
 using Application.Features.Properties.Queries.GetPaginated;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +21,15 @@ public class PropertiesController : BaseApiController
         return Ok(response);
     }
     
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetById([FromRoute] int id,CancellationToken cancellationToken)
+    {
+        var getPropertyByIdQuery = new GetPropertyByIdQuery(id);
+        var response = await Mediator.Send(getPropertyByIdQuery, cancellationToken);
+        
+        return Ok(response);
+    }
+    
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreatePropertyRequest request,CancellationToken cancellationToken)
     {
@@ -27,7 +38,11 @@ public class PropertiesController : BaseApiController
         
         var response = await Mediator.Send(createPropertyCommand, cancellationToken);
         
-        return Ok(response);
+        return CreatedAtAction(
+            nameof(GetById),    
+            new { id = response.Id },     
+            response                        
+        );
     }
     
     [HttpPut("{id:int}")]
@@ -39,6 +54,16 @@ public class PropertiesController : BaseApiController
         var response = await Mediator.Send(updatePropertyCommand, cancellationToken);
         
         return Ok(response);
+    }
+    
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Create([FromRoute] int id, CancellationToken cancellationToken)
+    {
+        var deletePropertyCommand = new DeletePropertyCommand(id);
+        
+        await Mediator.Send(deletePropertyCommand, cancellationToken);
+        
+        return Ok();
     }
 }
 

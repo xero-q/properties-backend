@@ -2,6 +2,7 @@ using Application.Abstractions.Data;
 using MediatR;
 using Application.Abstractions.Repositories;
 using Application.Contracts.Responses;
+using Application.Exceptions;
 using Application.Mappings;
 using FluentValidation;
 using ValidationException = Application.Exceptions.ValidationException;
@@ -18,7 +19,7 @@ namespace Application.Features.Properties.Commands.Create
 
             if (host is null)
             {
-                throw new ValidationException("Provided HostId doesn't exist.");
+                throw new NotFoundException("Host",request.HostId);
             }
 
             var property = request.MapToProperty();
