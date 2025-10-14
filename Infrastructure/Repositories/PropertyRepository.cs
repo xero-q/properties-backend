@@ -12,20 +12,39 @@ public class PropertyRepository(ApplicationDbContext context) : GenericRepositor
 {
     private readonly ApplicationDbContext _context = context;
 
-    public async Task<Pagination<PropertyResponse>> GetPaginatedPropertiesAsync(int pageNumber, int pageSize, string? search)
+    public async Task<Pagination<PropertyResponse>> GetPaginatedPropertiesAsync(int pageNumber, int pageSize, string? filterByName,string? filterByLocation,int? filterByStatus, int? filterByHostId)
     {
         // Base query
         var query = _context.Properties.AsQueryable();
 
-        // Apply search filter if provided
-        if (!string.IsNullOrWhiteSpace(search))
+        // Apply filter by name if provided
+        if (!string.IsNullOrWhiteSpace(filterByName))
         {
-            search = $"%{search.Trim()}%";
+            string search = $"%{filterByName.Trim()}%";
             query = query.Where(p =>
-                EF.Functions.Like(p.Name, search) ||
+                EF.Functions.Like(p.Name, search));
+        }
+        
+        // Apply filter by location if provided
+        if (!string.IsNullOrWhiteSpace(filterByLocation))
+        {
+            string search = $"%{filterByLocation.Trim()}%";
+            query = query.Where(p =>
                 EF.Functions.Like(p.Location, search));
         }
         
+        // Apply filter by status if provided
+        if (filterByStatus is not null)
+        {
+            query = query.Where(p => (int)p.Status == filterByStatus);
+        }
+        
+        // Apply filter by HostId if provided
+        if (filterByHostId is not null)
+        {
+            query = query.Where(p => p.HostId == filterByHostId);
+        }
+
         // Calculate total count without materializing the query
         var totalCountQuery = await query.CountAsync();
 

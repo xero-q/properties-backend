@@ -10,7 +10,7 @@ namespace Application.Features.Properties.Queries.GetPaginated
         public async Task<Pagination<PropertyResponse>> Handle(GetPaginatedPropertiesQuery request, CancellationToken cancellationToken)
         {
             return await propertyRepository.GetPaginatedPropertiesAsync(
-                 request.PageNumber,request.PageSize, request.Search);
+                 request.PageNumber,request.PageSize, request.filterByName,request.filterByLocation,request.filterByStatus,request.filterByHostId);
         }
     }
 }

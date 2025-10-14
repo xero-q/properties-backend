@@ -7,6 +7,9 @@ namespace Application.Features.Properties.Queries.GetPaginated
     public record GetPaginatedPropertiesQuery(
         int PageNumber,
         int PageSize,
-        string? Search
+        string? filterByName,
+        string? filterByLocation,
+        int? filterByStatus,
+        int? filterByHostId
 ) : IRequest<Pagination<PropertyResponse>>;
 }
