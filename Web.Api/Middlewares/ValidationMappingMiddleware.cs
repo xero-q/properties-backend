@@ -36,6 +36,16 @@ public class ValidationMappingMiddleware(RequestDelegate next)
 
             await context.Response.WriteAsJsonAsync(message);
         }
+        catch (Exception ex)
+        {
+            context.Response.StatusCode = 500;
+            var message = new
+            {
+                Success = false,
+                Message = ex.Message
+            };
+            await context.Response.WriteAsJsonAsync(message);
+        }
      
     }
 }

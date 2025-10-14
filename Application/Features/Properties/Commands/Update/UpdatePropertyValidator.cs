@@ -1,16 +1,16 @@
 ﻿using FluentValidation;
 
-namespace Application.Features.Properties.Commands.Create
+namespace Application.Features.Properties.Commands.Update
 {
     /// <summary>
     /// Create Document Validator
     /// </summary>
-    public sealed class CreatePropertyValidator : AbstractValidator<CreatePropertyCommand>
+    public sealed class UpdatePropertyValidator : AbstractValidator<UpdatePropertyCommand>
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        public CreatePropertyValidator()
+        public UpdatePropertyValidator()
         {
             RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required");
             RuleFor(x => x.Location).NotEmpty().WithMessage("Location is required");

@@ -1,5 +1,6 @@
 using Application.Contracts.Requests;
 using Application.Features.Properties.Commands.Create;
+using Application.Features.Properties.Commands.Update;
 using Application.Features.Properties.Queries.GetPaginated;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,17 @@ public class PropertiesController : BaseApiController
             request.PricePerNight, request.Status);
         
         var response = await Mediator.Send(createPropertyCommand, cancellationToken);
+        
+        return Ok(response);
+    }
+    
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> Create([FromBody] UpdatePropertyRequest request,[FromRoute] int id, CancellationToken cancellationToken)
+    {
+        var updatePropertyCommand = new UpdatePropertyCommand(id, request.HostId, request.Name, request.Location,
+            request.PricePerNight, request.Status);
+        
+        var response = await Mediator.Send(updatePropertyCommand, cancellationToken);
         
         return Ok(response);
     }
