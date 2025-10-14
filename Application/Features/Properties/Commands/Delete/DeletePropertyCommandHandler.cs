@@ -8,7 +8,7 @@ using ValidationException = Application.Exceptions.ValidationException;
 
 namespace Application.Features.Properties.Commands.Delete
 {
-    public class DeletePropertyCommandHandler(IUnitOfWork unitOfWork, IPropertyRepository propertyRepository) : IRequestHandler<DeletePropertyCommand, bool>
+    public class DeletePropertyCommandHandler(IPropertyRepository propertyRepository) : IRequestHandler<DeletePropertyCommand, bool>
     {
         public async Task<bool> Handle(DeletePropertyCommand request, CancellationToken cancellationToken)
         {
@@ -20,8 +20,6 @@ namespace Application.Features.Properties.Commands.Delete
             }
 
             await propertyRepository.DeleteByIdAsync(request.Id, cancellationToken);
-
-            await unitOfWork.SaveChangesAsync(cancellationToken);
 
             return true;
         }

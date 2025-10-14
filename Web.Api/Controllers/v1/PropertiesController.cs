@@ -4,6 +4,7 @@ using Application.Features.Properties.Commands.Delete;
 using Application.Features.Properties.Commands.Update;
 using Application.Features.Properties.Queries.GetById;
 using Application.Features.Properties.Queries.GetPaginated;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Api.Controllers.v1;
@@ -31,6 +32,7 @@ public class PropertiesController : BaseApiController
     }
     
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> Create([FromBody] CreatePropertyRequest request,CancellationToken cancellationToken)
     {
         var createPropertyCommand = new CreatePropertyCommand(request.HostId, request.Name, request.Location,
@@ -46,6 +48,7 @@ public class PropertiesController : BaseApiController
     }
     
     [HttpPut("{id:int}")]
+    [Authorize]
     public async Task<IActionResult> Create([FromBody] UpdatePropertyRequest request,[FromRoute] int id, CancellationToken cancellationToken)
     {
         var updatePropertyCommand = new UpdatePropertyCommand(id, request.HostId, request.Name, request.Location,
@@ -57,6 +60,7 @@ public class PropertiesController : BaseApiController
     }
     
     [HttpDelete("{id:int}")]
+    [Authorize]
     public async Task<IActionResult> Create([FromRoute] int id, CancellationToken cancellationToken)
     {
         var deletePropertyCommand = new DeletePropertyCommand(id);

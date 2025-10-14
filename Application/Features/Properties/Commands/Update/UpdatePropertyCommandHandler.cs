@@ -9,7 +9,7 @@ using ValidationException = Application.Exceptions.ValidationException;
 
 namespace Application.Features.Properties.Commands.Update
 {
-    public class UpdatePropertyCommandHandler(IValidator<UpdatePropertyCommand> validator, IUnitOfWork unitOfWork, IPropertyRepository propertyRepository,IHostRepository hostRepository) : IRequestHandler<UpdatePropertyCommand, PropertyResponse>
+    public class UpdatePropertyCommandHandler(IValidator<UpdatePropertyCommand> validator, IPropertyRepository propertyRepository,IHostRepository hostRepository) : IRequestHandler<UpdatePropertyCommand, PropertyResponse>
     {
         public async Task<PropertyResponse> Handle(UpdatePropertyCommand request, CancellationToken cancellationToken)
         {
@@ -36,8 +36,6 @@ namespace Application.Features.Properties.Commands.Update
             property.Status = request.Status;
 
             await propertyRepository.UpdateAsync(property, cancellationToken);
-
-            await unitOfWork.SaveChangesAsync(cancellationToken);
             
             return property.MapToResponse();
         }

@@ -17,7 +17,7 @@ public class PropertyRepository(ApplicationDbContext context) : GenericRepositor
         // Base query
         var query = _context.Properties.AsQueryable();
 
-        // Apply filter by name if provided
+        // Apply filter by Name if provided
         if (!string.IsNullOrWhiteSpace(filterByName))
         {
             string search = $"%{filterByName.Trim()}%";
@@ -25,7 +25,7 @@ public class PropertyRepository(ApplicationDbContext context) : GenericRepositor
                 EF.Functions.Like(p.Name, search));
         }
         
-        // Apply filter by location if provided
+        // Apply filter by Location if provided
         if (!string.IsNullOrWhiteSpace(filterByLocation))
         {
             string search = $"%{filterByLocation.Trim()}%";
@@ -33,7 +33,7 @@ public class PropertyRepository(ApplicationDbContext context) : GenericRepositor
                 EF.Functions.Like(p.Location, search));
         }
         
-        // Apply filter by status if provided
+        // Apply filter by Status if provided
         if (filterByStatus is not null)
         {
             query = query.Where(p => (int)p.Status == filterByStatus);
