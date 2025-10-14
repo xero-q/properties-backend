@@ -12,7 +12,7 @@ public sealed class PropertyResponse
     
     public required string Location { get; init; }
     
-    public required double PricePerNight { get; init; }
+    public required decimal PricePerNight { get; init; }
     
     public required PropertyStatus Status { get; init; } 
 

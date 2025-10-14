@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Domain.Bookings;
 using Domain.DomainEvents;
 using Domain.Hosts;
@@ -11,6 +12,7 @@ public enum PropertyStatus
     Active = 0
 }
 
+[Table("Properties")]
 public class Property:Entity
 {
    
@@ -22,7 +24,7 @@ public class Property:Entity
     
     public string Location { get; set; }
 
-    public double PricePerNight { get; set; }
+    public decimal PricePerNight { get; set; }
     
     public PropertyStatus Status { get; set; }
     

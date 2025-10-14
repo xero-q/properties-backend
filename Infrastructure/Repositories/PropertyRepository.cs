@@ -15,7 +15,7 @@ public class PropertyRepository(ApplicationDbContext context) : GenericRepositor
     public async Task<Pagination<PropertyResponse>> GetPaginatedPropertiesAsync(int pageNumber, int pageSize)
     {
         // Calculate total count without materializing the query
-        var totalCountQuery = await _context.Hosts.CountAsync();
+        var totalCountQuery = await _context.Properties.CountAsync();
 
         // Ensure valid pageNumber
         pageNumber = Math.Max(1, Math.Min(pageNumber, (int)Math.Ceiling((double)totalCountQuery / pageSize)));
@@ -24,7 +24,7 @@ public class PropertyRepository(ApplicationDbContext context) : GenericRepositor
         var skip = (pageNumber - 1) * pageSize;
 
         var results = await _context.Properties
-            .OrderByDescending(c => c.Id)
+            .OrderBy(c => c.Id)
             .Skip(skip)
             .Take(pageSize)
             .ToListAsync();
