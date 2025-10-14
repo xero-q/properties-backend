@@ -1,3 +1,5 @@
+using Application.Contracts.Requests;
+using Application.Features.Properties.Commands.Create;
 using Application.Features.Properties.Queries.GetPaginated;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +14,17 @@ public class PropertiesController : BaseApiController
     {
         var getPaginatedPropertiesQuery = new GetPaginatedPropertiesQuery(pageNumber, pageSize);
         var response = await Mediator.Send(getPaginatedPropertiesQuery, cancellationToken);
+        
+        return Ok(response);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreatePropertyRequest request,CancellationToken cancellationToken)
+    {
+        var createPropertyCommand = new CreatePropertyCommand(request.HostId, request.Name, request.Location,
+            request.PricePerNight, request.Status);
+        
+        var response = await Mediator.Send(createPropertyCommand, cancellationToken);
         
         return Ok(response);
     }

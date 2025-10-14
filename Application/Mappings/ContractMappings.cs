@@ -1,5 +1,6 @@
 using Application.Contracts.Requests;
 using Application.Contracts.Responses;
+using Application.Features.Properties.Commands.Create;
 using Domain.Hosts;
 using Domain.Properties;
 
@@ -16,6 +17,20 @@ public static class ContractMappings
             Phone = request.Phone
         };
     }
+    
+    public static Property MapToProperty(this CreatePropertyCommand request)
+    {
+        return new Property
+        {
+            HostId = request.HostId,
+            Name = request.Name,
+            Location = request.Location,
+            PricePerNight = request.PricePerNight,
+            Status = request.Status
+        };
+    }
+    
+    
     
     public static HostResponse MapToResponse(this Host host)
     {
