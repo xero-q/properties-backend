@@ -10,7 +10,7 @@ namespace Application.Features.Properties.Queries.GetById
     {
         public async Task<PropertyResponse> Handle(GetPropertyByIdQuery request, CancellationToken cancellationToken)
         {
-            var property = await propertyRepository.GetByIdAsync(request.Id, cancellationToken);
+            var property = await propertyRepository.GetByIdWithHostAsync(request.Id, cancellationToken);
 
             if (property is null)
             {

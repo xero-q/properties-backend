@@ -11,6 +11,13 @@ namespace Infrastructure.Repositories;
 public class PropertyRepository(ApplicationDbContext context) : GenericRepositoryAsync<Property>(context), IPropertyRepository
 {
     private readonly ApplicationDbContext _context = context;
+    
+    public async Task<Property?> GetByIdWithHostAsync(int id,CancellationToken cancellationToken=default)
+    {
+        return await context.Properties
+            .Include(p => p.Host)
+            .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+    }
 
     public async Task<Pagination<PropertyResponse>> GetPaginatedPropertiesAsync(int pageNumber, int pageSize, string? filterByName,string? filterByLocation,int? filterByStatus, int? filterByHostId)
     {
@@ -55,6 +62,7 @@ public class PropertyRepository(ApplicationDbContext context) : GenericRepositor
         var skip = (pageNumber - 1) * pageSize;
 
         var results = await query
+            .Include(p=>p.Host)
             .OrderBy(c => c.Id)
             .Skip(skip)
             .Take(pageSize)

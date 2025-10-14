@@ -6,5 +6,7 @@ namespace Application.Abstractions.Repositories;
 
 public interface IPropertyRepository:IGenericRepositoryAsync<Property>
 {
+    public Task<Property?> GetByIdWithHostAsync(int id, CancellationToken cancellationToken = default);
+    
     public Task<Pagination<PropertyResponse>> GetPaginatedPropertiesAsync(int pageNumber, int pageSize, string? filterByName,string? filterByLocation,int? filterByStatus, int? filterByHostId);
 }

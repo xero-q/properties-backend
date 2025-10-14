@@ -30,9 +30,6 @@ public static class ContractMappings
             CreatedAt = DateTime.UtcNow
         };
     }
-    
-    
-    
     public static HostResponse MapToResponse(this Host host)
     {
         return new HostResponse
@@ -54,7 +51,8 @@ public static class ContractMappings
             Location = property.Location,
             PricePerNight = property.PricePerNight,
             Status = property.Status,
-            CreatedAt = DateTime.SpecifyKind(property.CreatedAt, DateTimeKind.Utc)
+            CreatedAt = DateTime.SpecifyKind(property.CreatedAt, DateTimeKind.Utc),
+            Host = property.Host.MapToResponse()
         };
     }
 }

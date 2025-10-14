@@ -1,3 +1,4 @@
+using Domain.Hosts;
 using Domain.Properties;
 
 namespace Application.Contracts.Responses;
@@ -6,7 +7,9 @@ public sealed class PropertyResponse
 {
     public int Id { get; init; }
     
-    public int HostId { get; init; }
+    public required int HostId { get; init; }
+    
+    public required HostResponse Host { get; init; } = null!;
     
     public required string Name { get; init; }
     
