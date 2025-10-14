@@ -1,6 +1,6 @@
 using Application.Abstractions.Authentication;
 
-namespace Application.Helpers;
+namespace Infrastructure.Authentication;
 
 public class PasswordHelper:IPasswordHelper
 {
