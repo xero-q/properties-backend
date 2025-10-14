@@ -2,27 +2,23 @@ using Application.Abstractions.Data;
 using MediatR;
 using Application.Abstractions.Repositories;
 using Application.Contracts.Responses;
-using Application.Exceptions;
 using Application.Mappings;
+using FluentValidation;
+using ValidationException = Application.Exceptions.ValidationException;
 
 namespace Application.Features.Properties.Commands.Create
 {
-    public class CreatePropertyCommandHandler(IUnitOfWork unitOfWork, IPropertyRepository propertyRepository,IHostRepository hostRepository) : IRequestHandler<CreatePropertyCommand, PropertyResponse>
+    public class CreatePropertyCommandHandler(IValidator<CreatePropertyCommand> validator, IUnitOfWork unitOfWork, IPropertyRepository propertyRepository,IHostRepository hostRepository) : IRequestHandler<CreatePropertyCommand, PropertyResponse>
     {
         public async Task<PropertyResponse> Handle(CreatePropertyCommand request, CancellationToken cancellationToken)
         {
-            var validator = new CreatePropertyValidator();
-            var validationResult = await validator.ValidateAsync(request, cancellationToken);
-            if (!validationResult.IsValid)
-            {
-                throw new ValidationException("Incorrect data", validationResult);
-            }
-            
+            await validator.ValidateAsync(request, cancellationToken);
+           
             var host = await hostRepository.GetByIdAsync(request.HostId, cancellationToken);
 
             if (host is null)
             {
-                throw new ValidationException("Create Property failed, Host is null");
+                throw new ValidationException("Provided HostId doesn't exist.");
             }
 
             var property = request.MapToProperty();
