@@ -1,6 +1,6 @@
 using Application.Contracts.Responses;
 using Domain.Properties;
-using EHR.Application.Wrappers;
+using Application.Wrappers;
 
 namespace Application.Abstractions.Repositories;
 

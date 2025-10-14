@@ -2,7 +2,7 @@ using Application.Abstractions.Repositories;
 using Application.Contracts.Responses;
 using Application.Mappings;
 using Domain.Properties;
-using EHR.Application.Wrappers;
+using Application.Wrappers;
 using Infrastructure.Database.Persistence;
 using Microsoft.EntityFrameworkCore;
 

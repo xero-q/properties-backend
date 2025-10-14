@@ -15,5 +15,7 @@ public sealed class PropertyResponse
     public required decimal PricePerNight { get; init; }
     
     public required PropertyStatus Status { get; init; } 
+    
+    public required DateTime CreatedAt { get; init; }
 
 }

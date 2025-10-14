@@ -1,5 +1,5 @@
 ﻿using Application.Contracts.Responses;
-using EHR.Application.Wrappers;
+using Application.Wrappers;
 using MediatR;
 
 namespace Application.Features.Properties.Queries.GetPaginated

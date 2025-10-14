@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EHR.Application.Wrappers;
+namespace Application.Wrappers;
 
 public class Pagination<T>
 {

@@ -1,4 +1,4 @@
-﻿using EHR.Application.Wrappers;
+﻿using Application.Wrappers;
 using MediatR;
 using Application.Abstractions.Repositories;
 using Application.Contracts.Responses;

@@ -26,7 +26,8 @@ public static class ContractMappings
             Name = request.Name,
             Location = request.Location,
             PricePerNight = request.PricePerNight,
-            Status = request.Status
+            Status = request.Status,
+            CreatedAt = DateTime.UtcNow
         };
     }
     
@@ -53,10 +54,7 @@ public static class ContractMappings
             Location = property.Location,
             PricePerNight = property.PricePerNight,
             Status = property.Status,
-          
+            CreatedAt = DateTime.SpecifyKind(property.CreatedAt, DateTimeKind.Utc)
         };
     }
-    
-  
-    
 }
