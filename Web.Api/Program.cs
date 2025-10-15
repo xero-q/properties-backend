@@ -18,10 +18,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<ValidationMappingMiddleware>();
-app.UseCors("AllowFrontend");
+
 
 app.MapControllers();
 
