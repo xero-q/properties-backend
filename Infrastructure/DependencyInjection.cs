@@ -42,6 +42,7 @@ public static class DependencyInjection
         services.AddScoped<IPropertyRepository, PropertyRepository>();
         services.AddScoped<IHostRepository, HostRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IDomainEventRepository, DomainEventRepository>();
         
         services.AddTransient<IUnitOfWork, UnitOfWork>();
        

@@ -1,6 +1,7 @@
 using Application.Contracts.Requests;
 using Application.Contracts.Responses;
 using Application.Features.Properties.Commands.Create;
+using Domain.DomainEvents;
 using Domain.Hosts;
 using Domain.Properties;
 
@@ -53,6 +54,29 @@ public static class ContractMappings
             Status = property.Status,
             CreatedAt = DateTime.SpecifyKind(property.CreatedAt, DateTimeKind.Utc),
             Host = property.Host.MapToResponse()
+        };
+    }
+    
+    public static DomainEvent MapToDomainEvent(this CreateDomainEventCommand request)
+    {
+        return new DomainEvent
+        {
+            PropertyId = request.PropertyId,
+            EventType = request.EventType,
+            PayloadJSON = request.PayloadJSON,
+            CreatedAt = DateTime.UtcNow
+        };
+    }
+    
+    public static DomainEventResponse MapToResponse(this DomainEvent domainEvent)
+    {
+        return new DomainEventResponse
+        {
+            Id = domainEvent.Id,
+            EventType = domainEvent.EventType,
+            PayloadJSON = domainEvent.PayloadJSON,
+            CreatedAt = DateTime.SpecifyKind(domainEvent.CreatedAt, DateTimeKind.Utc),
+            PropertyId = domainEvent.PropertyId
         };
     }
 }

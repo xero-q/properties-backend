@@ -3,17 +3,13 @@ using SharedKernel;
 
 namespace Domain.DomainEvents;
 
-public enum DomainEventType {
-
-}
-
 public sealed class DomainEvent:Entity
 {
     public int PropertyId { get; set; }
     
     public Property Property { get; set; } = null!;
     
-    public DomainEventType EventType { get; set; }
+    public string EventType { get; set; }
     
     public DateTime CreatedAt { get; set; }
     
