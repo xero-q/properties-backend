@@ -1,4 +1,5 @@
 using Application.Features.Hosts.Queries.GetAll;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Api.Controllers.v1;
@@ -8,6 +9,7 @@ namespace Web.Api.Controllers.v1;
 public class HostsController : BaseApiController
 {
    [HttpGet]
+   [Authorize]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
         var getAllHostsQuery = new GetAllHostsQuery();

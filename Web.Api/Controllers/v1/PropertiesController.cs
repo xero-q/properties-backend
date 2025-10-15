@@ -14,6 +14,7 @@ namespace Web.Api.Controllers.v1;
 public class PropertiesController : BaseApiController
 {
    [HttpGet]
+   [Authorize]
     public async Task<IActionResult> GetPaginated(CancellationToken cancellationToken, int pageNumber = 1, int pageSize = 10, string? filterByName=null, string? filterByLocation = null, int? filterByStatus=null, int? filterByHostId=null)
     {
         var getPaginatedPropertiesQuery = new GetPaginatedPropertiesQuery(pageNumber, pageSize, filterByName,filterByLocation,filterByStatus,filterByHostId);
@@ -23,6 +24,7 @@ public class PropertiesController : BaseApiController
     }
     
     [HttpGet("{id:int}")]
+    [Authorize]
     public async Task<IActionResult> GetById([FromRoute] int id,CancellationToken cancellationToken)
     {
         var getPropertyByIdQuery = new GetPropertyByIdQuery(id);
